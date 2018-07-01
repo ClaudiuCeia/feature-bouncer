@@ -5,8 +5,8 @@
   "repository": "https://github.com/ClaudiuCeia/feature-toggles",
   "author": "Claudiu Ceia",
   "license": "MIT",
-  "main": "dist/src/index.js",
-  "typings": "dist/src/index.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "start": "cross-env NODE_ENV=production cd dist/ && node index.js",
     "start:dev": "cross-env NODE_ENV=development nodemon",
