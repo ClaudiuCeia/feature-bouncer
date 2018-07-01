@@ -3,5 +3,5 @@ temp/
 *.log
 *.swp
 .env
-coverage/
 dist/
+coverage
