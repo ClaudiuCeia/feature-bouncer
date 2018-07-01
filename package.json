@@ -1,7 +1,7 @@
 {
   "name": "feature-bouncer",
   "version": "0.0.1",
-  "description": "A simple feature toggle library",
+  "description": "A simple feature toggle library for Express",
   "author": {
     "name": "Claudiu Ceia",
     "email": "claudiu.ceia@gmail.com",
