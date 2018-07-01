@@ -15,8 +15,8 @@ I was looking for a feature gating solution for one of my projects and couldn't 
 
 That being said, this is also an excuse for me to learn more about building Node packages. If you want a mature solution, these two stood out for me while researching:
 
-- [Unleash](https://github.com/unleash/unleash) - A mature, enterprise ready, feature toggles service. Comes with a great UI and all the features you could hope for.
-- [React Feature Toggles](https://github.com/paralleldrive/react-feature-toggles) - A great client-side solution, built for React. 
+- **[Unleash](https://github.com/unleash/unleash)** - A mature, enterprise ready, feature toggles service. Comes with a great UI and all the features you could hope for.
+- **[React Feature Toggles](https://github.com/paralleldrive/react-feature-toggles)** - A great client-side solution, built for React. 
 
 ## Usage
 
@@ -84,7 +84,6 @@ FeatureBouncer.middleware(
 ```
 
 Pass to `app.use()` or to `app.get()` in order to initialize the context data, needed by the feature checkers.
-
 Usage:
 
 ```ts
@@ -92,6 +91,8 @@ app.use(bouncer.middleware);
 // or
 app.get('/yourRoute', bouncer.middleware, () => {})
 ```
+
+
 
 ```ts
 async FeatureBouncer.getX(name: string): Promise<boolean>
@@ -102,6 +103,8 @@ async FeatureBouncer.get(name: string): Promise<boolean>
 
  This part needs quite a bit of rework. Not happy with this as it is, and for the `getX()` version, which is the desirable option IMO, you need to remember to call `.catch()` on the Promise, otherwise it might hang. 
 
+
+
  ``` ts
  FeatureBouncer.debug()
  ```
@@ -109,11 +112,13 @@ async FeatureBouncer.get(name: string): Promise<boolean>
 If you passed `{ debug: true }` for options in the constructor, this will return an object showing you the results for each individual checks. Checks bail early, so if it hits `false` before finishing all of the checks, you won't see them all in here.
 
 
+
 ## Implementing new checks
 
 This library will contain a few general-purpose checks (like the percentage and query string ones implemented now) - but the idea is that you should build your own.
 
 The type for the check functions is:
+
 ```
 type Check = ((
   idx: string, 
@@ -124,10 +129,10 @@ type Check = ((
 The string in the return tuple should almost always be the `idx` that you receive as a parameter. This is used for debugging (see `debug()` method above). 
 
 ## Roadmap
-- [] Implement Redis storage
-- [] Refine `get()/getX()` functions
-- [] CLI utility to easily check if a certain context passes a test
-- [] Support different persistance layers / Remove Redis dependency
+- [ ] Implement Redis storage
+- [ ] Refine `get()/getX()` functions
+- [ ] CLI utility to easily check if a certain context passes a test
+- [ ] Support different persistance layers / Remove Redis dependency
 - [x] Add tests
 
 ## License
