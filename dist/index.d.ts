@@ -1,2 +1,2 @@
 export * from './Checks';
-export * from './Features';
+export * from './FeatureToggles';

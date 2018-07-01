@@ -4,5 +4,5 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./Checks"));
-__export(require("./Features"));
+__export(require("./FeatureToggles"));
 //# sourceMappingURL=index.js.map

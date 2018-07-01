@@ -1,4 +1,4 @@
-import { IFeaturesContext } from './Features';
+import { IFeaturesContext } from './FeatureToggles';
 
 /**
  * Every FeatureToggle is formed by multiple Checks AND-ed together. Overrides are also
