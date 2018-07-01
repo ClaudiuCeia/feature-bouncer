@@ -1,6 +1,6 @@
 {
   "name": "feature-toggles",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A simple feature toggle library",
   "repository": "https://github.com/ClaudiuCeia/feature-toggles",
   "author": "Claudiu Ceia",
