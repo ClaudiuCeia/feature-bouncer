@@ -15,6 +15,9 @@
   "engines": {
     "node": ">=8"
   },
+  "files": [
+    "dist/*"
+  ],
   "keywords": [
     "feature-toggles",
     "feature-flipping",
@@ -29,7 +32,8 @@
     "start:debug": "cross-env NODE_ENV=development node -r ts-node/register --inspect ./src/index.ts",
     "lint": "tslint --project .",
     "lint:fix": "tslint --project . --fix",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublish": "yarn build"
   },
   "dependencies": {
     "@types/express": "^4.16.0",
