@@ -2,7 +2,7 @@ import * as express from 'express';
 import { Check } from './Checks';
 import { v4 } from 'uuid';
 
-export interface IFeatureTogglesOptions {
+export interface IFeatureBouncerOptions {
   debug: boolean;
 }
 
@@ -45,7 +45,7 @@ export interface IMap<T extends FeatureOrCheck> {
 /**
  * Main library entry point
  */
-export class FeatureToggles {
+export class FeatureBouncer {
   store: any;
 
   /**
@@ -56,18 +56,18 @@ export class FeatureToggles {
   features: IMap<FeatureToggle>;
 
   /**
-   * Debug FeatureToggles
+   * Debug FeatureBouncer
    */
   private trace: any = {};
 
-  private options: IFeatureTogglesOptions;
+  private options: IFeatureBouncerOptions;
   private context: IFeaturesContext;
 
   constructor(params: {
     store: any,
     features: IMap<FeatureToggle>,
     getContext?: ((request: express.Request) => IFeaturesContext) | undefined,
-    options?: IFeatureTogglesOptions
+    options?: IFeatureBouncerOptions
   }) {
     this.store = params.store;
 

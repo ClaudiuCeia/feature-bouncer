@@ -1,4 +1,4 @@
-import { FeatureToggles } from "../FeatureToggles";
+import { FeatureBouncer } from "../FeatureBouncer";
 import { QueryStringCheck } from '../Checks';
 
 const checkQS = async (
@@ -6,7 +6,7 @@ const checkQS = async (
   param: string,
   value: string
 ) => {
-  const features = new FeatureToggles({
+  const features = new FeatureBouncer({
     store: {},
     features: {
       test: {

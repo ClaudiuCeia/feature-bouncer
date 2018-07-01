@@ -1,5 +1,5 @@
 {
-  "name": "feature-toggles",
+  "name": "feature-bouncer",
   "version": "0.0.1",
   "description": "A simple feature toggle library",
   "author": {

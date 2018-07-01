@@ -1,8 +1,8 @@
-import { FeatureToggles } from "../FeatureToggles";
+import { FeatureBouncer } from "../FeatureBouncer";
 import { PercentageOfRequestsCheck } from '../Checks';
 
 const checkPercentage = async (n: number) => {
-  const features = new FeatureToggles({
+  const features = new FeatureBouncer({
     store: {},
     features: {
       test: {

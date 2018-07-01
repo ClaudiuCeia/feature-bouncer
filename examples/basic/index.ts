@@ -1,12 +1,12 @@
 import * as express from 'express';
 import * as Redis from 'ioredis';
 import { PercentageOfRequestsCheck, QueryStringCheck } from './../../src/Checks';
-import { FeatureToggles } from './../../src/FeatureToggles';
+import { FeatureBouncer } from './../../src/FeatureBouncer';
 
 const app = express();
 const redis = new Redis();
 
-const features = new FeatureToggles({
+const features = new FeatureBouncer({
   store: redis,
   getContext: (req: express.Request) => {
     return {

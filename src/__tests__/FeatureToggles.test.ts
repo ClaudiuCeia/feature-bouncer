@@ -1,9 +1,9 @@
-import { FeatureToggles } from "../FeatureToggles";
+import { FeatureBouncer } from "../FeatureBouncer";
 import { PercentageOfRequestsCheck } from '../Checks';
 
-describe('Test FeatureToggles', () => {
+describe('Test FeatureBouncer', () => {
   it('Doesn\'t log if debug not set', () => {
-    const features = new FeatureToggles({
+    const features = new FeatureBouncer({
       store: {},
       features: {
         test: {
@@ -22,7 +22,7 @@ describe('Test FeatureToggles', () => {
   it('Logs when debug set', () => {
     jest.spyOn(global.console, 'log').mockImplementation(() => { return; })
 
-    const features = new FeatureToggles({
+    const features = new FeatureBouncer({
       store: {},
       features: {
         test: {
