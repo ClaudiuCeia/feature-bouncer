@@ -1,4 +1,4 @@
-# FeatureBouncer  [![Build Status](https://api.travis-ci.com/ClaudiuCeia/feature-bouncer.svg?branch=master)](https://travis-ci.org/ClaudiuCeia/feature-bouncer)
+# FeatureBouncer  [![Build Status](https://api.travis-ci.com/ClaudiuCeia/feature-toggles.svg?branch=master)](https://travis-ci.org/ClaudiuCeia/feature-toggles)
 
 _A simple feature toggle library with persistance in Redis, built for Express. You can use it for feature gating, AB testing, etc._ 
 
