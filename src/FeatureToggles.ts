@@ -2,6 +2,10 @@ import * as express from 'express';
 import { Check } from './Checks';
 import { v4 } from 'uuid';
 
+export interface IFeatureTogglesOptions {
+  debug: boolean;
+}
+
 /**
  * A FeatureToggle is defined by a group of checks and overrides.
  * The overrides are useful for cases like cheatcodes (foo.com/?hasBetaAccess=true)
@@ -54,14 +58,16 @@ export class FeatureToggles {
   /**
    * Debug FeatureToggles
    */
-  trace: any = {};
+  private trace: any = {};
 
+  private options: IFeatureTogglesOptions;
   private context: IFeaturesContext;
 
   constructor(params: {
     store: any,
-    getContext?: ((request: express.Request) => IFeaturesContext) | undefined,
     features: IMap<FeatureToggle>,
+    getContext?: ((request: express.Request) => IFeaturesContext) | undefined,
+    options?: IFeatureTogglesOptions
   }) {
     this.store = params.store;
 
@@ -77,6 +83,7 @@ export class FeatureToggles {
     }
 
     this.features = params.features;
+    this.options = params.options || { debug: false };
   }
 
   middleware = (
@@ -96,20 +103,27 @@ export class FeatureToggles {
    * Get a FeatureToggle result, exceptions are _not_ silenced, you need a catch block
    */
   getX = async (name: string) => {
-    this.trace[name] = {
-      checks: null,
-      overrides: null,
-    };
+
+    if (this.options.debug) {
+      this.trace[name] = {
+        checks: null,
+        overrides: null,
+      };
+    }
 
     const feature = this.features[name];
     if (!feature) {
       const err = `There's no feature named ${name}`;
-      this.trace[name] = err;
+
+      if (this.options.debug) {
+        this.trace[name] = err;
+      }
+
       throw new Error(err);
     }
 
     const { checks, overrides } = feature;
-
+    let res = null;
     if (overrides) {
       const overridesResult = await this.getCheckGroup(
         overrides,
@@ -118,19 +132,29 @@ export class FeatureToggles {
       );
 
       if (overridesResult) {
-        return overridesResult;
+        res = overridesResult;
       }
     }
 
     /**
      * Get a FeatureToggle result, exceptions are silenced
      */
-    return this.getCheckGroup(checks, name, 'checks');
+    res = this.getCheckGroup(checks, name, 'checks');
+
+    if (this.options.debug) {
+      console.log(this.trace);
+    }
+
+    return res;
   }
 
   get = async (name: string) => {
     return this.getX(name).catch(err => {
-      this.trace[name].error = err;
+      if (this.options.debug) {
+        this.trace[name].error = err;
+        console.log(this.trace);
+      }
+
       return false;
     })
   }
@@ -155,11 +179,13 @@ export class FeatureToggles {
     const resolvedResults = await Promise.all(results);
 
     for (const res of resolvedResults) {
-      if (!this.trace[name][type]) {
-        this.trace[name][type] = {};
-      }
+      if (this.options.debug) {
+        if (!this.trace[name][type]) {
+          this.trace[name][type] = {};
+        }
 
-      this.trace[name][type][res[0]] = res[1];
+        this.trace[name][type][res[0]] = res[1];
+      }
 
       if (!res[1]) {
         return false;
