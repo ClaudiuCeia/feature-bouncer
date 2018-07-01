@@ -1,21 +1,19 @@
 # FeatureBouncer  [![Build Status](https://api.travis-ci.com/ClaudiuCeia/feature-toggles.svg?branch=master)](https://travis-ci.org/ClaudiuCeia/feature-toggles)
 
-A simple feature toggle library with persistance in Redis, built for Express. You can use it for feature gating, AB testing, etc. 
+_A simple feature toggle library with persistance in Redis, built for Express. You can use it for feature gating, AB testing, etc._ 
 
-`*NOTE*: This is a very early development version, use at your own risk. Contributions welcome.`
+`NOTE: This is a very early development version, use at your own risk. Contributions welcome.`
 
 ## Why
 
 I was looking for a feature gating solution for one of my projects and couldn't find anything that really satisfies my needs. 
 
-- TypeScript types
-- Ability to add my own, computed checks, dependent on context (such as user data)
-- Active repository (many options out there seem abandoned)
-- Optimized for Express
+- [ ] TypeScript types
+- [ ] Ability to add my own, computed checks, dependent on context (such as user data)
+- [ ] Active repository (many options out there seem abandoned)
+- [ ] Optimized for Express
 
-That being said, this is also an excuse for me to learn more about building Node packages. 
-
-If you want a mature solution, these two stood out for me while researching:
+That being said, this is also an excuse for me to learn more about building Node packages. If you want a mature solution, these two stood out for me while researching:
 
 - [Unleash](https://github.com/unleash/unleash) - A mature, enterprise ready, feature toggles service. Comes with a great UI and all the features you could hope for.
 - [React Feature Toggles](https://github.com/paralleldrive/react-feature-toggles) - A great client-side solution, built for React. 
