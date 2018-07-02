@@ -1,6 +1,6 @@
-# FeatureBouncer  [![Build Status](https://travis-ci.org/ClaudiuCeia/feature-bouncer.svg?branch=master)](https://travis-ci.org/ClaudiuCeia/feature-bouncer) [![Coverage Status](https://coveralls.io/repos/github/ClaudiuCeia/feature-bouncer/badge.svg?branch=master)](https://coveralls.io/github/ClaudiuCeia/feature-bouncer?branch=master)
+[![Build Status](https://travis-ci.org/ClaudiuCeia/feature-bouncer.svg?branch=master)](https://travis-ci.org/ClaudiuCeia/feature-bouncer) [![Coverage Status](https://coveralls.io/repos/github/ClaudiuCeia/feature-bouncer/badge.svg?branch=master)](https://coveralls.io/github/ClaudiuCeia/feature-bouncer?branch=master) [![Known Vulnerabilities](https://snyk.io/test/github/ClaudiuCeia/feature-bouncer/badge.svg)](https://snyk.io/test/github/ClaudiuCeia/feature-bouncer) [![Total Alerts](https://img.shields.io/lgtm/alerts/g/ClaudiuCeia/feature-bouncer.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ClaudiuCeia/feature-bouncer/alerts/) [![Language Grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/ClaudiuCeia/feature-bouncer.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ClaudiuCeia/feature-bouncer/context:javascript)
 
-[![Total Alerts](https://img.shields.io/lgtm/alerts/g/ClaudiuCeia/feature-bouncer.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ClaudiuCeia/feature-bouncer/alerts/) [![Language Grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/ClaudiuCeia/feature-bouncer.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ClaudiuCeia/feature-bouncer/context:javascript)
+# FeatureBouncer  
 
 _A simple feature toggle library with persistance in Redis, built for Express. You can use it for feature gating, AB testing, etc._ 
 
