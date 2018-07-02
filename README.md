@@ -1,5 +1,7 @@
 # FeatureBouncer  [![Build Status](https://travis-ci.org/ClaudiuCeia/feature-bouncer.svg?branch=master)](https://travis-ci.org/ClaudiuCeia/feature-bouncer) [![Coverage Status](https://coveralls.io/repos/github/ClaudiuCeia/feature-bouncer/badge.svg?branch=master)](https://coveralls.io/github/ClaudiuCeia/feature-bouncer?branch=master)
 
+[![Total Alerts](https://img.shields.io/lgtm/alerts/g/ClaudiuCeia/feature-bouncer.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ClaudiuCeia/feature-bouncer/alerts/) [![Language Grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/ClaudiuCeia/feature-bouncer.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ClaudiuCeia/feature-bouncer/context:javascript)
+
 _A simple feature toggle library with persistance in Redis, built for Express. You can use it for feature gating, AB testing, etc._ 
 
 `NOTE: This is a very early development version, use at your own risk. Contributions welcome.`
