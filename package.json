@@ -13,7 +13,7 @@
   },
   "bugs": "https://github.com/ClaudiuCeia/feature-toggles/issues",
   "engines": {
-    "node": ">=8"
+    "node": ">=10.14"
   },
   "files": [
     "dist/*"
