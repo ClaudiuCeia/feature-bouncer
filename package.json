@@ -33,6 +33,7 @@
     "pretest": "yarn lint",
     "test": "cross-env NODE_ENV=test jest --watch",
     "test:ci": "cross-env NODE_ENV=test jest --ci",
+    "test:coverage": "cross-env NODE_ENV=test jest --coverage",
     "lint": "tslint --project .",
     "lint:fix": "tslint --project . --fix",
     "build": "tsc",
