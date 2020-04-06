@@ -17,6 +17,9 @@ const features = new FeatureBouncer({
       }
     };
   },
+  options: {
+    debug: true,
+  },
   features: {
     demo: {
       checks: {
@@ -24,7 +27,7 @@ const features = new FeatureBouncer({
       },
       overrides: {
         'querycheck': QueryStringCheck('foo', 'pass'),
-      }
+      },
     },
     demo2: {
       checks: {
@@ -38,9 +41,14 @@ app.use(features.middleware);
 
 app.get('/', async (_: any, res: any) => {
   const check = await features.get('demo');
-  console.log(features.debug());
+  const debug = `
+    <pre>${JSON.stringify(features.debug(), null, 2)}</pre>
+  `;
 
-  res.send(check ? 'yay' : 'nay');
+  res.send(check
+    ? `<div>Yes <br> ${debug}</div>`
+    : `<div>No <br> ${debug}</div>`
+  );
 });
 
 app.listen(3000, () => console.log('listening to port 3000'));
