@@ -1,6 +1,7 @@
 import { FeatureBouncer, IFeaturesContext } from "../FeatureBouncer";
 import { PercentageOfRequestsCheck } from '../checks/PercentageOfRequestsCheck';
 import { v4 } from "uuid";
+import { QueryStringCheck } from "../checks/QueryStringCheck";
 
 describe('Test FeatureBouncer', () => {
   it('Doesn\'t log if debug not set', () => {
@@ -108,5 +109,26 @@ describe('Test FeatureBouncer', () => {
     expect(features.debug()).toEqual({
       "foo": "There's no feature named foo",
     });
+  });
+
+  it('Test overrides', () => {
+    const features = new FeatureBouncer({
+      store: {},
+      options: {
+        debug: true,
+      },
+      features: {
+        example: {
+          checks: {
+            'invalid': QueryStringCheck('foo', 'bar'),
+          },
+          overrides: {
+            'rollout': PercentageOfRequestsCheck(100),
+          },
+        }
+      }
+    });
+
+    expect(features.get('example')).toBeTruthy();
   });
 });

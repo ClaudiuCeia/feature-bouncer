@@ -132,10 +132,12 @@ export class FeatureBouncer {
       }
     }
 
-    /**
-     * Get a FeatureToggle result, exceptions are silenced
-     */
-    res = this.getCheckGroup(checks, name, 'checks');
+    if (!res) {
+      /**
+       * Get a FeatureToggle result, exceptions are silenced
+       */
+      res = this.getCheckGroup(checks, name, 'checks');
+    }
 
     if (this.options.debug) {
       console.log(this.trace);
