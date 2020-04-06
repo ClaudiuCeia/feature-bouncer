@@ -1,6 +1,8 @@
 import * as express from 'express';
 import * as Redis from 'ioredis';
-import { PercentageOfRequestsCheck, QueryStringCheck } from './../../src/Checks';
+import { PercentageOfRequestsCheck } from '../../src/checks/PercentageOfRequestsCheck';
+import { QueryStringCheck } from './../../src/checks/QueryStringCheck';
+import { UserAgentCheck } from './../../src/checks/UserAgentCheck';
 import { FeatureBouncer } from './../../src/FeatureBouncer';
 
 const app = express();
@@ -24,6 +26,7 @@ const features = new FeatureBouncer({
     demo: {
       checks: {
         'traffic': PercentageOfRequestsCheck(50),
+        'user-agent': UserAgentCheck('IE'),
       },
       overrides: {
         'querycheck': QueryStringCheck('foo', 'pass'),

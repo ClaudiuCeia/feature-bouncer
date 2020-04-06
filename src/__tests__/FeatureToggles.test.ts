@@ -1,5 +1,5 @@
 import { FeatureBouncer } from "../FeatureBouncer";
-import { PercentageOfRequestsCheck } from '../Checks';
+import { PercentageOfRequestsCheck } from '../checks/PercentageOfRequestsCheck';
 
 describe('Test FeatureBouncer', () => {
   it('Doesn\'t log if debug not set', () => {

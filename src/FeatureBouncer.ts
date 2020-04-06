@@ -1,10 +1,6 @@
 import * as express from 'express';
-import { Check } from './Checks';
 import { v4 } from 'uuid';
-
-export interface IFeatureBouncerOptions {
-  debug: boolean;
-}
+import { Check, IFeatureBouncerOptions } from './types/types';
 
 /**
  * A FeatureToggle is defined by a group of checks and overrides.

@@ -1,5 +1,5 @@
 import { FeatureBouncer } from "../FeatureBouncer";
-import { QueryStringCheck } from '../Checks';
+import { QueryStringCheck } from "../checks/QueryStringCheck";
 
 const checkQS = async (
   request: any,

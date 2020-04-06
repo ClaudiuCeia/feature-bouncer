@@ -1,5 +1,5 @@
 import { FeatureBouncer } from "../FeatureBouncer";
-import { PercentageOfRequestsCheck } from '../Checks';
+import { PercentageOfRequestsCheck } from '../checks/PercentageOfRequestsCheck';
 
 const checkPercentage = async (n: number) => {
   const features = new FeatureBouncer({

@@ -1,2 +1,2 @@
-export * from './Checks';
+export * from './checks/PercentageOfRequestsCheck';
 export * from './FeatureBouncer';
