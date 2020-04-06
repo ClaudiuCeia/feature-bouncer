@@ -145,14 +145,14 @@ export class FeatureBouncer {
   }
 
   get = async (name: string) => {
-    return this.getX(name).catch(err => {
-      if (this.options.debug) {
-        this.trace[name].error = err;
-        console.log(this.trace);
-      }
-
+    let res = false;
+    try {
+      res = await this.getX(name)
+    } catch (err) {
       return false;
-    })
+    }
+
+    return res;
   }
 
   /**

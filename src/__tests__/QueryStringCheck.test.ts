@@ -62,4 +62,18 @@ describe('Test QueryStringCheck', () => {
     )).toBeFalsy();
 
   });
+
+  it('Fails if no request', async () => {
+    expect(await checkQS(
+      null,
+      'foo',
+      'bar'
+    )).toBeFalsy();
+
+    expect(await checkQS(
+      {},
+      'foo',
+      'bar'
+    )).toBeFalsy();
+  });
 });

@@ -5,6 +5,7 @@ const checkCookie = async (
   request: any,
   cookieName: string,
   match: string,
+  shouldThrow = false,
 ) => {
   const features = new FeatureBouncer({
     store: {},
@@ -23,7 +24,7 @@ const checkCookie = async (
     () => { return; }
   );
 
-  return features.get('test');
+  return shouldThrow ? features.getX('test') : features.get('test');
 }
 
 describe('Test CookieCheck', () => {
@@ -64,6 +65,20 @@ describe('Test CookieCheck', () => {
 
     expect(await checkCookie(
       request as any,
+      "badCookieName",
+      'foo',
+    )).toBeFalsy();
+  });
+
+  it('Fails if no request', async () => {
+    expect(await checkCookie(
+      null,
+      "badCookieName",
+      'foo',
+    )).toBeFalsy();
+
+    expect(await checkCookie(
+      {},
       "badCookieName",
       'foo',
     )).toBeFalsy();

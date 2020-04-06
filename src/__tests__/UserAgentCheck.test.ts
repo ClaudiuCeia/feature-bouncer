@@ -72,4 +72,16 @@ describe('Test UserAgentCheck', () => {
     )).toBeFalsy();
 
   });
+
+  it('Fails if no request', async () => {
+    expect(await checkUA(
+      null,
+      'foo',
+    )).toBeFalsy();
+
+    expect(await checkUA(
+      {},
+      'foo',
+    )).toBeFalsy();
+  });
 });
