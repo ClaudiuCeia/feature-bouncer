@@ -1,12 +1,13 @@
+import * as express from "express";
 import { FeatureBouncer } from "../FeatureBouncer";
 import { CookieCheck } from "../checks/CookieCheck";
 
 const checkCookie = async (
-  request: any,
+  request: express.Request,
   cookieName: string,
   match: string,
   shouldThrow = false,
-) => {
+): Promise<boolean> => {
   const features = new FeatureBouncer({
     store: {},
     features: {
@@ -36,7 +37,7 @@ describe('Test CookieCheck', () => {
     };
 
     expect(await checkCookie(
-      request as any,
+      request as express.Request,
       'cookieName',
       'cookie-value'
     )).toBeTruthy();
@@ -50,7 +51,7 @@ describe('Test CookieCheck', () => {
     };
 
     expect(await checkCookie(
-      request as any,
+      request as express.Request,
       'cookieName',
       '^[0-9]+$',
     )).toBeTruthy();
@@ -64,21 +65,7 @@ describe('Test CookieCheck', () => {
     };
 
     expect(await checkCookie(
-      request as any,
-      "badCookieName",
-      'foo',
-    )).toBeFalsy();
-  });
-
-  it('Fails if no request', async () => {
-    expect(await checkCookie(
-      null,
-      "badCookieName",
-      'foo',
-    )).toBeFalsy();
-
-    expect(await checkCookie(
-      {},
+      request as express.Request,
       "badCookieName",
       'foo',
     )).toBeFalsy();

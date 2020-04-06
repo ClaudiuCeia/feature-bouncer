@@ -1,10 +1,11 @@
+import * as express from "express";
 import { FeatureBouncer } from "../FeatureBouncer";
 import { UserAgentCheck } from "../checks/UserAgentCheck";
 
 const checkUA = async (
-  request: any,
+  request: express.Request,
   param: string,
-) => {
+): Promise<boolean> => {
   const features = new FeatureBouncer({
     store: {},
     features: {
@@ -35,7 +36,7 @@ describe('Test UserAgentCheck', () => {
     };
 
     expect(await checkUA(
-      request as any,
+      request as express.Request,
       'Linux',
     )).toBeTruthy();
   });
@@ -48,8 +49,9 @@ describe('Test UserAgentCheck', () => {
     };
 
     expect(await checkUA(
-      request as any,
-      'Chrome\/79\.',
+      request as express.Request,
+      // eslint-disable-next-line no-useless-escape
+      "Chrome\/79\.",
     )).toBeTruthy();
   });
 
@@ -62,26 +64,15 @@ describe('Test UserAgentCheck', () => {
     const requestNotSet = {};
 
     expect(await checkUA(
-      request as any,
+      request as express.Request,
       'InternetExplorer',
     )).toBeFalsy();
 
     expect(await checkUA(
-      requestNotSet as any,
+      requestNotSet as express.Request,
+      // eslint-disable-next-line no-useless-escape
       'Chrome\/78\.',
     )).toBeFalsy();
 
-  });
-
-  it('Fails if no request', async () => {
-    expect(await checkUA(
-      null,
-      'foo',
-    )).toBeFalsy();
-
-    expect(await checkUA(
-      {},
-      'foo',
-    )).toBeFalsy();
   });
 });

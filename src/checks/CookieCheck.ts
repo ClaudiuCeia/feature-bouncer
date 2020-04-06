@@ -1,8 +1,8 @@
-import { IFeaturesContext } from '../FeatureBouncer';
+import { FeaturesContext } from '../FeatureBouncer';
 import { Check } from '../types/types';
 
 export const CookieCheck = (cookieName: string, match: string): Check => {
-  return async (idx: string, context: IFeaturesContext) => {
+  return async (idx: string, context: FeaturesContext): Promise<[string, boolean]> => {
     if (!context) {
       throw new Error(`Check ${idx}: No context set; I need a request object`);
     }

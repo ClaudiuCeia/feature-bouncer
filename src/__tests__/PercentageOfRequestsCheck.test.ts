@@ -1,7 +1,8 @@
+import * as express from "express";
 import { FeatureBouncer } from "../FeatureBouncer";
 import { PercentageOfRequestsCheck } from '../checks/PercentageOfRequestsCheck';
 
-const checkPercentage = async (n: number) => {
+const checkPercentage = async (n: number): Promise<boolean> => {
   const features = new FeatureBouncer({
     store: {},
     features: {
@@ -14,7 +15,7 @@ const checkPercentage = async (n: number) => {
   });
 
   features.middleware(
-    {} as any,
+    {} as express.Request,
     {},
     () => { return; }
   );
@@ -39,11 +40,13 @@ describe('Test PercentageOfRequestsCheck', () => {
 
   it('Throws on too large values', async () => {
     expect.assertions(1);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return expect(PercentageOfRequestsCheck(101)('test', {} as any)).rejects.toBeTruthy();
   });
 
   it('Throws on negative values', async () => {
     expect.assertions(1);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return expect(PercentageOfRequestsCheck(-1)('test', {} as any)).rejects.toBeTruthy();
   });
 });

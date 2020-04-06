@@ -1,8 +1,7 @@
-import { IFeaturesContext } from '../FeatureBouncer';
 import { Check } from '../types/types';
 
 export const PercentageOfRequestsCheck = (percentage: number): Check => {
-  return async (idx: string, _: IFeaturesContext) => {
+  return async (idx: string): Promise<[string, boolean]> => {
     if (percentage > 100 || percentage < 0) {
       throw new Error(`
         You can't gate ${idx} to ${percentage}% requests.

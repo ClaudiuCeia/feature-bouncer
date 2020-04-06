@@ -1,4 +1,4 @@
-import { FeatureBouncer, IFeaturesContext } from "../FeatureBouncer";
+import { FeatureBouncer, FeaturesContext } from "../FeatureBouncer";
 import { PercentageOfRequestsCheck } from '../checks/PercentageOfRequestsCheck';
 import { v4 } from "uuid";
 import { QueryStringCheck } from "../checks/QueryStringCheck";
@@ -16,6 +16,7 @@ describe('Test FeatureBouncer', () => {
       }
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     features.middleware({} as any, {}, () => { return; });
     features.get('test');
     expect(features.debug()).toEqual({});
@@ -38,6 +39,7 @@ describe('Test FeatureBouncer', () => {
       }
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     features.middleware({} as any, {}, () => { return; });
     features.get('test');
 
@@ -51,7 +53,7 @@ describe('Test FeatureBouncer', () => {
   it('Works with custom context', () => {
     const features = new FeatureBouncer({
       store: {},
-      getContext: (request) => ({
+      getContext: (request): FeaturesContext => ({
         key: v4(),
         request,
         values: {
@@ -61,7 +63,7 @@ describe('Test FeatureBouncer', () => {
       features: {
         test: {
           checks: {
-            'test': async (idx: string, context: IFeaturesContext) => {
+            'test': async (idx: string, context: FeaturesContext): Promise<[string, boolean]> => {
               return [idx, context.values.guid === 42];
             },
           },

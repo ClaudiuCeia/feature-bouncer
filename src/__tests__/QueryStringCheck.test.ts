@@ -1,11 +1,12 @@
+import * as express from "express";
 import { FeatureBouncer } from "../FeatureBouncer";
 import { QueryStringCheck } from "../checks/QueryStringCheck";
 
 const checkQS = async (
-  request: any,
+  request: express.Request,
   param: string,
   value: string
-) => {
+): Promise<boolean> => {
   const features = new FeatureBouncer({
     store: {},
     features: {
@@ -35,7 +36,7 @@ describe('Test QueryStringCheck', () => {
     };
 
     expect(await checkQS(
-      request as any,
+      request as express.Request,
       'foo',
       'bar'
     )).toBeTruthy();
@@ -50,30 +51,16 @@ describe('Test QueryStringCheck', () => {
     const requestNotSet = {};
 
     expect(await checkQS(
-      request as any,
+      request as express.Request,
       'foo',
       'bar'
     )).toBeFalsy();
 
     expect(await checkQS(
-      requestNotSet as any,
+      requestNotSet as express.Request,
       'foo',
       'bar'
     )).toBeFalsy();
 
-  });
-
-  it('Fails if no request', async () => {
-    expect(await checkQS(
-      null,
-      'foo',
-      'bar'
-    )).toBeFalsy();
-
-    expect(await checkQS(
-      {},
-      'foo',
-      'bar'
-    )).toBeFalsy();
   });
 });

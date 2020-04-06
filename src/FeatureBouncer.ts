@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { v4 } from 'uuid';
-import { Check, IFeatureBouncerOptions } from './types/types';
+import { Check, FeatureBouncerOptions } from './types/types';
 
 /**
  * A FeatureToggle is defined by a group of checks and overrides.
@@ -8,8 +8,8 @@ import { Check, IFeatureBouncerOptions } from './types/types';
  * or allowing developers to pass all checks.
  */
 export interface FeatureToggle {
-  checks: IMap<Check>;
-  overrides?: IMap<Check>;
+  checks: FeatureBouncerMap<Check>;
+  overrides?: FeatureBouncerMap<Check>;
 }
 
 /**
@@ -17,7 +17,7 @@ export interface FeatureToggle {
  * only depend on the Request object, but for your app you would probably want
  * to define checks which depend on user attributes or some other app-specific state.
  */
-export interface IFeaturesContext {
+export interface FeaturesContext {
   /**
    * The key is used for persisting the check results. By default we use a random uuid v4,
    * but you will probably want to set this to the user id for your app.
@@ -30,11 +30,12 @@ export interface IFeaturesContext {
   /**
    * Any app-specific values you might want to pass on.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   values?: any;
-};
+}
 
 type FeatureOrCheck = FeatureToggle | Check;
-export interface IMap<T extends FeatureOrCheck> {
+export interface FeatureBouncerMap<T extends FeatureOrCheck> {
   [key: string]: T;
 }
 
@@ -42,35 +43,38 @@ export interface IMap<T extends FeatureOrCheck> {
  * Main library entry point
  */
 export class FeatureBouncer {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   store: any;
 
   /**
    * The function used to generate the context. By default it sets a random uuid key
    * and passes on the Express request object.
    */
-  getContext: ((request: express.Request) => IFeaturesContext);
-  features: IMap<FeatureToggle>;
+  getContext: ((request: express.Request) => FeaturesContext);
+  features: FeatureBouncerMap<FeatureToggle>;
 
   /**
    * Debug FeatureBouncer
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private trace: any = {};
 
-  private options: IFeatureBouncerOptions;
-  private context: IFeaturesContext;
+  private options: FeatureBouncerOptions;
+  private context: FeaturesContext;
 
   constructor(params: {
-    store: any,
-    features: IMap<FeatureToggle>,
-    getContext?: ((request: express.Request) => IFeaturesContext) | undefined,
-    options?: IFeatureBouncerOptions
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    store: any;
+    features: FeatureBouncerMap<FeatureToggle>;
+    getContext?: ((request: express.Request) => FeaturesContext) | undefined;
+    options?: FeatureBouncerOptions;
   }) {
     this.store = params.store;
 
     if (params.getContext) {
       this.getContext = params.getContext;
     } else {
-      this.getContext = (request: express.Request) => {
+      this.getContext = (request: express.Request): FeaturesContext => {
         return {
           key: v4(),
           request
@@ -84,9 +88,11 @@ export class FeatureBouncer {
 
   middleware = (
     request: express.Request,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     _: any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     next: any
-  ) => {
+  ): void => {
     this.context = this.getContext(request);
     next();
   }
@@ -98,7 +104,7 @@ export class FeatureBouncer {
   /**
    * Get a FeatureToggle result, exceptions are _not_ silenced, you need a catch block
    */
-  getX = async (name: string) => {
+  getX = async (name: string): Promise<boolean> => {
 
     if (this.options.debug) {
       this.trace[name] = {
@@ -146,7 +152,7 @@ export class FeatureBouncer {
     return res;
   }
 
-  get = async (name: string) => {
+  get = async (name: string): Promise<boolean> => {
     let res = false;
     try {
       res = await this.getX(name)
@@ -160,15 +166,16 @@ export class FeatureBouncer {
   /**
    * Get a debug trace to understand the results for every ToggleCheck so far
    */
-  debug = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  debug = (): any => {
     return this.trace;
   }
 
   private getCheckGroup = async (
-    group: IMap<Check>,
+    group: FeatureBouncerMap<Check>,
     name: string,
     type: string
-  ) => {
+  ): Promise<boolean> => {
     const results = Object.keys(group).map((checkKey) => {
       const checkFunc = group[checkKey];
       return checkFunc(checkKey, this.context);
