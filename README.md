@@ -6,16 +6,9 @@ _A simple feature toggle library with persistance in Redis, built for Express. Y
 
 `NOTE: This is a very early development version, use at your own risk. Contributions welcome.`
 
-## Why
+## Probably not the package you're looking for
 
-I was looking for a feature gating solution for one of my projects and couldn't find anything that really satisfies my needs. 
-
-- [ ] TypeScript types
-- [ ] Ability to add my own, computed checks, dependent on context (such as user data)
-- [ ] Active repository (many options out there seem abandoned)
-- [ ] Optimized for Express
-
-That being said, this is also an excuse for me to learn more about building Node packages. If you want a mature solution, these two stood out for me while researching:
+If you want a mature solution, these two stood out for me while researching:
 
 - **[Unleash](https://github.com/unleash/unleash)** - A mature, enterprise ready, feature toggles service. Comes with a great UI and all the features you could hope for.
 - **[React Feature Toggles](https://github.com/paralleldrive/react-feature-toggles)** - A great client-side solution, built for React. 
@@ -103,10 +96,6 @@ async FeatureBouncer.get(name: string): Promise<boolean>
 
  - **name** (string) The name of the feature you want to check (for the AB test example above, that would be `example`). Returns a Promise containing the result of the check. `getX()` can throw, `get()` will just return `false` if there's an error.
 
- This part needs quite a bit of rework. Not happy with this as it is, and for the `getX()` version, which is the desirable option IMO, you need to remember to call `.catch()` on the Promise, otherwise it might hang. 
-
-
-
  ``` ts
  FeatureBouncer.debug()
  ```
@@ -114,10 +103,9 @@ async FeatureBouncer.get(name: string): Promise<boolean>
 If you passed `{ debug: true }` for options in the constructor, this will return an object showing you the results for each individual checks. Checks bail early, so if it hits `false` before finishing all of the checks, you won't see them all in here.
 
 
-
 ## Implementing new checks
 
-This library will contain a few general-purpose checks (like the percentage and query string ones implemented now) - but the idea is that you should build your own.
+This library contains a few general, but the idea is that you should build your own for anything particular to your project.
 
 The type for the check functions is:
 
@@ -132,9 +120,8 @@ The string in the return tuple should almost always be the `idx` that you receiv
 
 ## Roadmap
 - [ ] Implement Redis storage
-- [ ] Refine `get()/getX()` functions
 - [ ] CLI utility to easily check if a certain context passes a test
-- [ ] Support different persistance layers / Remove Redis dependency
+- [ ] Support different persistance layers 
 - [x] Add tests
 
 ## License
